@@ -41,11 +41,11 @@ def main_background_ngrok():  # run-btt-llm-open
     port = "8501"
     
     ensure_model()
-    command = f"nohup streamlit run {app_path} --server.fileWatcherType none > {log_file} --server.port {port} 2>&1 &"
+    command = f"nohup streamlit run {app_path} --server.fileWatcherType none --server.port {port} > {log_file} 2>&1 &"
     ngrok_cmd = f"nohup ngrok http {port} > {ngrok_log} 2>&1 &"
     try:
-        subprocess.run(command, shell=True, check=True)
-        subprocess.run(ngrok_cmd, shell=True, check=True)
+        subprocess.Popen(command, shell=True)
+        subprocess.Popen(ngrok_cmd, shell=True)
         time.sleep(2)
         ngrok_url = get_ngrok_url()
         print("앱이 백그라운드에서 실행 중입니다!")
