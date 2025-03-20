@@ -130,8 +130,10 @@ run-btt-llm-list
 - tools/app_page.py 에 load_parser 안에 model_name 값을 사용하고자하는 모델 병으로 변경
 
 모델 설치
-- 설치하고자 하는 모델을 확인하고 ollama pull [Ollama 공식 사이트](https://ollama.com/search)
-
+- 설치하고자 하는 모델을 확인하고 설치 [Ollama 공식 사이트](https://ollama.com/search)
+```bash
+  ollama pull [모델 이름]
+```
 Features
 - Main Page: PDF를 업로드해 텍스트를 추출하고 뷰어로 확인.
 - First Page: 업로드된 PDF에 대해 LLM 파싱 및 챗 어시스턴트 실행.
