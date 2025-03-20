@@ -11,11 +11,10 @@ import os
 
 class Biollm:
     def __init__(self, model:str ="gemma3:12b"):
-        data = 'prompt.json'
-        script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
-        json_path = os.path.join(script_dir, data)  # Absolute path to JSON
 
-        with open(json_path, 'r') as json_file:
+        prompt_path = os.path.join(os.path.dirname(__file__), "prompt.json")
+
+        with open(prompt_path, 'r') as json_file:
             
             self.data = json.load(json_file)
 
