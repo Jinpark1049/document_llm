@@ -14,7 +14,7 @@ from .llm_parser import *
 @st.cache_resource
 def load_embeddings():
     return HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-mpnet-base-v2",
+        model_name="BAAI/bge-large-zh-v1.5",  # 다국어 지원 (한국어 포함) 또는 "BAAI/bge-large-en-v1.5" (더 작은 모델)
         model_kwargs={'device': 'cpu'},
         encode_kwargs={'normalize_embeddings': True},
     )
