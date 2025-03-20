@@ -126,9 +126,6 @@ run-btt-llm-list
   mistral:latest  xyz789abc123    4.1 GB  2 days ago
 
 ```
-모델 변경
-- tools/app_page.py 에 load_parser 안에 model_name 값을 사용하고자하는 모델 병으로 변경
-
 모델 설치
 - 설치하고자 하는 모델을 확인하고 설치 [Ollama 공식 사이트](https://ollama.com/search)
 ```bash
