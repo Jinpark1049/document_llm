@@ -20,18 +20,17 @@ def main_background():  # run-btt-llm-bg
     app_path = os.path.join(os.path.dirname(__file__), "app.py")
     log_file = os.path.join(os.getcwd(), "btt_llm.log")
     port = "8501"
-    
     ensure_model()
-    command = f"nohup streamlit run {app_path} --server.port {port} --server.fileWatcherType none > {log_file} 2>&1 &"
+    command = f"nohup streamlit run {app_path} --server.fileWatcherType none --server.port {port} > {log_file} 2>&1 &"
     try:
-        subprocess.run(command, shell=True, check=True)
-        time.sleep(2)
+        subprocess.Popen(command, shell=True)  # Popen으로 백그라운드 실행
+        time.sleep(2)  # 프로세스가 시작될 시간 확보
         print("앱이 백그라운드에서 실행 중입니다!")
         print(f"로컬 접속 주소: http://localhost:{port}")
         print(f"앱 로그 파일: {log_file}")
         print("실행 중인 프로세스 확인: ps aux | grep streamlit")
         print("종료 방법: sudo kill -9 <PID>")
-    except subprocess.CalledProcessError as e:
+    except Exception as e:
         print(f"백그라운드 실행 실패: {e}")
         sys.exit(1)
 
@@ -42,7 +41,7 @@ def main_background_ngrok():  # run-btt-llm-open
     port = "8501"
     
     ensure_model()
-    command = f"nohup streamlit run {app_path} --server.port {port} --server.fileWatcherType none > {log_file} 2>&1 &"
+    command = f"nohup streamlit run {app_path} --server.fileWatcherType none > {log_file} --server.port {port} 2>&1 &"
     ngrok_cmd = f"nohup ngrok http {port} > {ngrok_log} 2>&1 &"
     try:
         subprocess.run(command, shell=True, check=True)
