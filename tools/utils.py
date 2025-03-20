@@ -9,7 +9,6 @@ import re
 def check_ollama():
     try:
         subprocess.run(["ollama", "--version"], check=True, capture_output=True)
-        print("Ollama is installed!")
     except (subprocess.CalledProcessError, FileNotFoundError):
         print("Ollama is not installed. Run: `curl -fsSL https://ollama.com/install.sh | sh`")
         sys.exit(1)
@@ -33,6 +32,18 @@ def get_ollama_models():
         return result.stdout.strip()
     except subprocess.CalledProcessError as e:
         return f"Ollama 모델 리스트를 가져오는 데 실패했습니다: {e}"
+    
+def get_ollama_model_names():
+    """설치된 Ollama 모델 이름만 리스트로 반환"""
+    raw_output = get_ollama_models()
+    if "failed" in raw_output.lower():
+        return ["gemma3:12b"]  
+    lines = raw_output.splitlines()
+    if len(lines) <= 1:  
+        return ["gemma3:12b"]
+
+    model_names = [line.split()[0] for line in lines[1:] if line.strip()]
+    return model_names if model_names else ["gemma3:12b"]
 
 def get_ngrok_url():
     """ngrok의 공용 URL을 가져옴"""
