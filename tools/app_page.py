@@ -24,12 +24,12 @@ def load_parser(model_name = 'gemma3:12b'):
     return Biollm(model = model_name)
 
 def main_page(embeddings_model, parser):
-
+    
     if "run_chat_assistant" not in st.session_state:
         st.session_state.run_chat_assistant = False
     if "run_llm_parser" not in st.session_state:
         st.session_state.run_llm_parser = False
-
+    
     st.session_state["embeddings_model"] = embeddings_model
     st.session_state["parser"] = parser
 
