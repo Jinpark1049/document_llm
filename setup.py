@@ -20,7 +20,7 @@ class CustomInstallCommand(install):
                 print("Ollama를 설치합니다...")
                 
                 try:
-                    subprocess.run(["curl", "-fsSL", "https://ollama.com/install.sh", "|", "sh"], shell=True, check=True)
+                    subprocess.run("curl -fsSL https://ollama.com/install.sh | sh", shell=True, check=True)
                     print("Ollama 설치 완료!")
                     ollama_installed = True
                     
@@ -47,19 +47,23 @@ setup(
     version="0.1.0",
     description="Specialized BTT report parser using Ollama",
     author="Jinpark1049",
-    url="https://github.com/Jinpark1049/btt_llm",
+    url="https://github.com/Jinpark1049/document_llm.git",
     packages=find_packages(),
     install_requires=[
         "streamlit>=1.20.0",
         "PyMuPDF>=1.23.0",  # For fitz
+        "pandas>=1.5.0",
         "ollama>=0.1.0",
         "langchain>=0.0.300",
         "langchain-huggingface>=0.0.1",
         "langchain-community>=0.0.1",  # For FAISS
         "streamlit-pdf-viewer>=0.0.8",
-        "pandas>=1.5.0",
         "faiss-cpu>=1.7.0",  # FAISS CPU version
+        "requests>=2.28.0",  # ngrok URL 요청용
+        "langchain-ollama>=0.0.1", 
     ],
+    package_data = {
+        "tools": ["prompt.json"],}, # tools 패키지에 prompt.json 포함
     entry_points={ # 명령어 설정
         "console_scripts": [
             "run-btt-llm = run.run_streamlit:main",
