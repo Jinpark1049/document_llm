@@ -17,7 +17,7 @@ def main():
     st.sidebar.header("Select LLM Model")
     model_options = get_ollama_model_names()
     model_name = st.sidebar.selectbox(
-        "Choose an Ollama model",
+        "Choose a model",
         options=model_options,
         index=model_options.index("gemma3:12b") if "gemma3:12b" in model_options else 0
     )
